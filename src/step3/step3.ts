@@ -1,0 +1,57 @@
+import { fifteen, five, three } from '../costants';
+
+/**
+ * Accept number and verify is contain the '3' number
+ * @param input
+ */
+function containXNum(input: number) {
+  return `${input}`.indexOf(`${three}`) > -1;
+}
+
+/**
+ * Accept number and verify is an even number
+ * @param num
+ */
+function cntEvenNums(num: number) {
+  const two = 2;
+  return num % two === 0;
+}
+
+export default (start: number, end: number) => {
+  let tip = 0;
+  let tap = 0;
+  let tipTap = 0;
+  let gold = 0;
+  let integer = 0;
+  let result = '';
+
+  for (let number = start; number <= end; number += 1) {
+    if (cntEvenNums(number)) {
+      integer += 1;
+    }
+
+    if (containXNum(number)) {
+      result = result.concat('gold ');
+      gold += 1;
+    } else if (number >= fifteen && number % fifteen === 0) {
+      result = result.concat('tiptap ');
+      tipTap += 1;
+    } else if (number % five === 0) {
+      result = result.concat('tap ');
+      tap += 1;
+    } else if (number % three === 0) {
+      result = result.concat('tip ');
+      tip += 1;
+    } else {
+      result = result.concat(`${number} `);
+    }
+  }
+
+  result = result.concat(`\ntip: ${tip}`);
+  result = result.concat(`\ntap: ${tap}`);
+  result = result.concat(`\ntiptap: ${tipTap}`);
+  result = result.concat(`\ngold: ${gold}`);
+  result = result.concat(`\ninteger: ${integer}`);
+
+  return result;
+};
